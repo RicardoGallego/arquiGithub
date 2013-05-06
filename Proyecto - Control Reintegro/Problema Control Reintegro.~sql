@@ -1,0 +1,40 @@
+/*
+  En la tabla ldc_encaintesap(Encabezado de la Interfaz Contable de SAP) en el campo txtcabec en el campo txtcabec 
+  (Texto Cabecera) concatenarle un guion (-) y la informacion que ahi en asiecons (Consecutivo del tipo de movimiento)
+  de la tabla asiento_sap (asientos de diario).
+  
+  en la linea 2676: -> ldc_pkinterfazsurti.vaGENDOCU_ENVIA_SAP = 'A' <- se asigno la 'A' para que le infomacion no se 
+  envie a SAP
+  
+  mirar las lineas 501, 561 y 1115   
+*/
+
+select CLAVCONT, CLASECTA, INDICCME, INDICIVA, CONDPAGO, FECHBASE, REFFACTR, BASEIMPT,
+          CENTROCO, ORDENINT, CANTIDAD, ASIGNACN, TXTPOSCN, CENTROBE, SEGMENTO, OBJCOSTO,
+          CLAVREF1, CLAVREF2, CLAVREF3, SOCIEDGL, MATERIAL, TIPORETC, INDRETEC, BASERETC,
+          COD_CENTROBENEF, COD_GRUPOCONCE, COD_CAUSACARGO, FECHVALOR, CTADIV, ICLIFECH, 
+          ICLIFECR, sum(IMPOMTRX) IMPOMTRX, sum(IMPOMSOC) IMPOMSOC
+     from LDC_INCOLIQU
+    where ICLINUDO = 94--nuICLINUDO
+  group by CLAVCONT, CLASECTA, INDICCME, INDICIVA, CONDPAGO, FECHBASE, REFFACTR, BASEIMPT,
+          CENTROCO, ORDENINT, CANTIDAD, ASIGNACN, TXTPOSCN, CENTROBE, SEGMENTO, OBJCOSTO,
+          CLAVREF1, CLAVREF2, CLAVREF3, SOCIEDGL, MATERIAL, TIPORETC, INDRETEC, BASERETC,
+          COD_CENTROBENEF, COD_GRUPOCONCE, COD_CAUSACARGO, FECHVALOR, CTADIV, ICLIFECH, 
+          ICLIFECR
+    order by COD_CENTROBENEF, COD_GRUPOCONCE, COD_CAUSACARGO;
+    
+    SELECT * FROM asiento_sap a;
+    
+    SELECT * FROM ldc_encaintesap e;
+    
+    SELECT * FROM ldc_detaintesap d; 
+    
+    SELECT * FROM LDC_INCOLIQU;
+    
+    
+    
+    
+    
+    
+    
+--SELECT ICLINUDO FROM LDC_INCOLIQU;

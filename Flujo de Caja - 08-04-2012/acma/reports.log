@@ -1,0 +1,66 @@
+
+Starting report TRCO [Fri Dec 14 16:30:57 2012] ...
+REP-0110: Unable to open file 'c:\gas\cde\src\TRCO\TRCO'.
+REP-1070: Error while opening or saving a document.
+REP-0110: Unable to open file 'c:\gas\cde\src\TRCO\TRCO'.
+End report TRCO [Fri Dec 14 16:31:02 2012].
+
+Starting report TRCO [Fri Dec 14 16:32:34 2012] ...
+REP-0110: Unable to open file 'c:\gas\cde\src\TRCO\TRCO'.
+REP-1070: Error while opening or saving a document.
+REP-0110: Unable to open file 'c:\gas\cde\src\TRCO\TRCO'.
+End report TRCO [Fri Dec 14 16:32:36 2012].
+
+Starting report TRCO [Fri Dec 14 16:33:30 2012] ...
+REP-0110: Unable to open file 'c:\gas\cde\src\TRCO\TRCO'.
+REP-1070: Error while opening or saving a document.
+REP-0110: Unable to open file 'c:\gas\cde\src\TRCO\TRCO'.
+End report TRCO [Fri Dec 14 16:33:32 2012].
+
+Starting report TRCO [Fri Dec 14 16:34:50 2012] ...
+End report TRCO [Fri Dec 14 16:35:21 2012].
+
+Starting report TRCO [Fri Dec 14 16:37:09 2012] ...
+End report TRCO [Fri Dec 14 16:37:52 2012].
+
+Starting report TRCO [Mon Dec 17 08:02:27 2012] ...
+End report TRCO [Mon Dec 17 08:03:15 2012].
+
+Starting report TRCO [Mon Dec 17 08:06:52 2012] ...
+End report TRCO [Mon Dec 17 08:07:53 2012].
+
+Starting report TRCO [Mon Dec 17 08:13:00 2012] ...
+End report TRCO [Mon Dec 17 08:20:55 2012].
+
+Starting report TRCO [Mon Dec 17 15:48:37 2012] ...
+End report TRCO [Mon Dec 17 15:49:06 2012].
+
+Starting report TRCO [Mon Dec 17 15:49:13 2012] ...
+ORA-01722: invalid number
+GROUP BY ==>  NUNUSE, CONCCUCA
+REP-0594: No report output generated.
+End report TRCO [Mon Dec 17 15:49:21 2012].
+
+Starting report TRCO [Mon Dec 17 15:49:28 2012] ...
+ORA-01722: invalid number
+GROUP BY ==>  NUNUSE, CONCCUCA
+REP-0594: No report output generated.
+End report TRCO [Mon Dec 17 15:49:42 2012].
+
+Starting report TRCO [Mon Dec 17 16:10:42 2012] ...
+End report TRCO [Mon Dec 17 16:11:13 2012].
+
+Starting report TRCO [Mon Dec 17 16:42:03 2012] ...
+End report TRCO [Mon Dec 17 16:42:27 2012].
+
+Starting report TRCO [Tue Dec 18 16:58:42 2012] ...
+End report TRCO [Tue Dec 18 17:00:47 2012].
+
+Starting report TRCO [Tue Dec 18 17:07:57 2012] ...
+End report TRCO [Tue Dec 18 17:10:15 2012].
+
+Starting report TRCO [Tue Dec 18 17:24:03 2012] ...
+End report TRCO [Tue Dec 18 17:24:34 2012].
+
+Starting report TRCO [Tue Dec 18 17:35:00 2012] ...
+End report TRCO [Tue Dec 18 17:35:21 2012].

@@ -1,0 +1,49 @@
+Analisis Compra de Gas  WEB
+Gas Caribe
+Campos Tabla
+Total = k11 = H11 + I11
+	          H11 = E11*($H$7)*$F$8+H22
+			        E11 = D11/E8
+					      D11 = INPUT VOL J133(GNU Okala) = 87530,14
+						  E8  = PROMIGAS G6 (INPUT II (F49/100))
+						        INPUT II F49 = PODER CALORIFICO GUAJIRA = 966,20   
+					H7  = TOTAL = (Ballena Bqilla + Bquilla Cartagena + STRT Mamonla + Cartagena Sjo + AO&M)
+					      0,680 = (    0,336      +       0,057       +     0,015    +         0     + 490,0)       
+					F8  = INPUT II F6 (TRM PROMEDIO MES) = 1802,25
+					H22 = I22/2
+					      I22 = 11500000
+			  I11 = NULL 
+			  
+Cuota Fomento  M11 = K11 * 3%
+
+Impuesto Transporte N11 = k11*6%
+
+Perdida Gas O11= D11*O7*O8-O20 
+				 D11 =  D11 = INPUT VOL J133(GNU Okala) = 87530,14
+				 O7  = 0,69
+				 O8  = 6,0399
+				 O20 = 4911061,212
+
+				 
+
+				 
+GDO
+GAS 
+		F5  = C5*D5*E5
+		      C5  = 153500 - C6
+				     c6 = 114700
+			  D5  = INPUT II -> F5 (F7) = 1871,25
+			  E5  = 6,0399
+		
+
+E2
+	Ecopetrol
+			GAS
+				F5  = C5*D5*E5
+					  E5  = 6.0399
+					  D5  = INPUT II -> F5 (F7) = 1871,25
+					  C5  = 0
+							
+					
+		
+						  

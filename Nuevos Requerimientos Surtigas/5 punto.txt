@@ -1,0 +1,37 @@
+Nombre:             GONZALEZ DE SIERRA CARMEN
+Código:             1046297
+Cedula:             42204156
+Facturas:           157140897 -  27/02/2013
+                    156432359 – 01/02/2013
+
+					  
+codigo_pagare = 		10048522
+codigo_servicio = 		1048549
+codigo_departamento = 	70
+codigo_localidad = 		708
+codigo_interno_venta = 	2071387
+codigo_proveedor = 		5300
+tecnico = 				4
+sucursal = 				274
+
+Código Servicio: 1048549
+
+      Nombre: PRASCA NAVARRO NORCY MARIA
+
+     Cedula: 1401687200
+
+    Facturas: 157715138,  Fecha de Vencimiento 19 Marzo 2013
+
+    Facturas:156740723,  Fecha de Vencimiento 18 Febrero 2013
+
+
+nuvefnsega 		1048549		->  codigo SERVICIO DE GAS DEL USUARIO QUE COMPRA
+nuvefndepa 		70			->  codigo DEPARTAMENTO DE DONDE SE REGISTRA LA VENTA
+nuvefnloca 		708			->  codigo LOCALIDAD DE DONDE SE REGISTRA LA VENTA
+nuvefncodi 		2071387		->  codigo INTERNO CONSECUTIVO DE LA VENTA
+nuvefncpve 		10048522	->  COMPROBANDE DE VENTA O SOLICITUD DE CREDITO DE LA VENTA
+nuvefncopr 		5300		->  codigo CONTRATISTA PROVEDOR DONDE SE HACE LA VENTA
+
+SELECT * FROM ventafnb;
+
+pixels e code

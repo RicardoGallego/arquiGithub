@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root version="1.2" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+	<jsp:directive.page contentType="text/html;charset=ISO-8859-1"
+		pageEncoding="ISO-8859-1" />
+	<f:view>
+		<ice:outputDeclaration doctypeRoot="html"
+			doctypePublic="-//W3C//DTD HTML 4.01 Transitional//EN"
+			doctypeSystem="http://www.w3.org/TR/html4/loose.dtd" />
+		<html>
+			<head>
+				<title>GESTION DE LOS MEDICAMENTOS</title>
+				<link rel="stylesheet" type="text/css"
+					href="./xmlhttp/css/xp/xp.css" />
+			</head>
+			<body>
+				<ice:outputText value="GESTION DE LOS MEDICAMENTOS" />
+				<ice:form id="FORM-MedicamentoTabla">
+				<!-- Manejo de controles de edicion -->
+				<ice:panelGrid columns="4" >
+				<ice:selectBooleanCheckbox id="SlctEdit"
+							partialSubmit="true" valueChangeListener="#{managerMedicamento.effectChangeEdit}"
+							value="#{managerMedicamento.renderEdit}" />
+				<ice:outputText value="Editar" />
+				<ice:selectBooleanCheckbox id="SlctDel"
+							partialSubmit="true" valueChangeListener="#{managerMedicamento.effectChangeDelete}"
+							value="#{managerMedicamento.renderDelete}" />
+				<ice:outputText value="Borrar" />
+				</ice:panelGrid>
+				<!-- FIN - Manejo de controles de edicion -->
+				<!-- Manejo de controles de paginacion -->
+				<ice:panelGrid columns="2" >
+				<ice:outputText value="Numero de elementos por pagina" />
+						<ice:selectOneMenu id="selecPaginador"
+						partialSubmit="true" valueChangeListener="#{managerMedicamento.effectChangePaginator}" 
+						value="#{managerMedicamento.paginacion}">
+							<f:selectItem itemValue="5" itemLabel="5" />
+							<f:selectItem itemValue="10" itemLabel="10" />
+							<f:selectItem itemValue="15" itemLabel="15" />
+							<f:selectItem itemValue="20" itemLabel="20" />
+							<f:selectItem itemValue="369999" itemLabel="Todos" />
+						</ice:selectOneMenu>
+			    </ice:panelGrid>
+				<!-- FIN - Manejo de controles de paginacion -->
+				<!-- Tabla de despliegue de datos -->
+					<ice:dataTable id="tablaMedicamentos" rows="#{managerMedicamento.paginacion}"  title="Tabla Medicamentos"
+						value="#{managerMedicamento.listMedicamentos}" var="medicamentoT">
+						<ice:column id="idMedicamento">
+							<f:facet name="header">
+								<ice:outputText value="ID Medicamento" />
+							</f:facet>
+							<ice:outputText value="#{managerMedicamento.medicamento.idMedic}" />
+						</ice:column>
+						<ice:column id="nombreMedicamento">
+							<f:facet name="header">
+								<ice:outputText value="Nombre" />
+							</f:facet>
+							<ice:inputText value="#{managerMedicamento.medicamento.nomMedic}" readonly="#{!managerMedicamento.renderEdit}" />
+						</ice:column>
+						<ice:column id="precioMedicamento">
+							<f:facet name="header">
+								<ice:outputText value="Precio" />
+							</f:facet>
+							<ice:inputText value="#{managerMedicamento.medicamento.precioMedic}" readonly="#{!managerMedicamento.renderEdit}" />
+						</ice:column>
+						<ice:column id="TipoMedicamento">
+							<f:facet name="header">
+								<ice:outputText value="Tipo" />
+							</f:facet>
+							<ice:inputText value="#{managerMedicamento.medicamento.tipoMedic}" readonly="#{!managerMedicamento.renderEdit}" />
+						</ice:column>
+						<!-- Boton de edicion de datos -->
+						<ice:column id="idMedicamento" rendered="#{managerMedicamento.renderEdit}">
+							<f:facet name="header">
+								<ice:outputText value="Editar" />
+							</f:facet>
+							<ice:commandButton value="Actualizar"
+								actionListener="#{managerMedicamento.Update}">
+								<f:attribute name="medicamentoT" value="#{medicamentoT}" />
+							</ice:commandButton>
+						</ice:column>
+						<!-- FIN - Boton de edicion de datos -->
+						<!-- Boton de borrado de datos -->
+						<ice:column id="idMedicamento" rendered="#{managerMedicamento.renderDelete}">
+							<f:facet name="header">
+								<ice:outputText value="Borrar" />
+							</f:facet>
+							<ice:commandButton panelConfirmation="panelconfirmborrar" value="Borrar"
+								actionListener="#{managerMedicamento.Delete}">
+								<f:attribute name="medicamentoT" value="#{medicamentoT}" />
+							</ice:commandButton>
+							<ice:panelConfirmation id="panelconfirmborrar" acceptLabel="Si" cancelLabel="No"
+							 message="¿Esta seguro de eliminar el objeto?" />
+						</ice:column>
+						<!-- FIN - Boton de borrado de datos -->
+					</ice:dataTable>
+					<!-- FIN - Tabla de despliegue de datos -->
+					<!-- Controles del manejo de la paginacion  -->
+					<ice:dataPaginator for="tablaMedicamentos" paginator="true" fastStep="5"
+						paginatorMaxPages="5">
+						<f:facet name="first">
+							<ice:graphicImage style="border:none;"
+								url="../xmlhttp/css/xp/css-images/arrow-first.gif"
+								title="First Page"></ice:graphicImage>
+						</f:facet>
+						<f:facet name="last">
+							<ice:graphicImage style="border:none;"
+								url="../xmlhttp/css/xp/css-images/arrow-last.gif"
+								title="Last Page"></ice:graphicImage>
+						</f:facet>
+						<f:facet name="previous">
+							<ice:graphicImage style="border:none;"
+								url="../xmlhttp/css/xp/css-images/arrow-previous.gif"
+								title="Previous Page"></ice:graphicImage>
+						</f:facet>
+						<f:facet name="next">
+							<ice:graphicImage style="border:none;"
+								url="../xmlhttp/css/xp/css-images/arrow-next.gif"
+								title="Next Page"></ice:graphicImage>
+						</f:facet>
+						<f:facet name="fastforward">
+							<ice:graphicImage style="border:none;"
+								url="../xmlhttp/css/xp/css-images/arrow-ff.gif"
+								title="Fast Forward"></ice:graphicImage>
+						</f:facet>
+						<f:facet name="fastrewind">
+							<ice:graphicImage style="border:none;"
+								url="../xmlhttp/css/xp/css-images/arrow-fr.gif"
+								title="Fast Backwards"></ice:graphicImage>
+						</f:facet>
+					</ice:dataPaginator>
+					<!-- FIN - Controles del manejo de la paginacion  -->
+					<!-- Texto informativo de la paginacion  -->
+					<ice:dataPaginator id="dataScroll_2" for="tablaMedicamentos"
+						rowsCountVar="rowsCount"
+						displayedRowsCountVar="displayedRowsCount"
+						firstRowIndexVar="firstRowIndex" lastRowIndexVar="lastRowIndex"
+						pageCountVar="pageCount" pageIndexVar="pageIndex">
+						<ice:outputFormat
+							value="{0} Encontrados, desplegados {1}, desde {2} hasta {3}. Página {4} / {5}."
+							styleClass="standard">
+							<f:param value="#{rowsCount}" />
+							<f:param value="#{displayedRowsCount}" />
+							<f:param value="#{firstRowIndex}" />
+							<f:param value="#{lastRowIndex}" />
+							<f:param value="#{pageIndex}" />
+							<f:param value="#{pageCount}" />
+						</ice:outputFormat>
+					</ice:dataPaginator>
+				    <!-- FIN - Texto informativo de la paginacion  -->
+				<!-- Control de exportacion de datos  -->
+				<ice:dataExporter for="tablaMedicamentos" type="excel" id="bajarMedicamentos" label="Bajar tabla"/>
+				<!-- FIN - Control de exportacion de datos  -->
+
+				</ice:form>
+				<ice:form id="FORMcrearMedicamento">
+				<!-- Manejo de creacion de la entidad  -->
+					<ice:panelGrid columns="2">
+						<div align="right">
+							<ice:outputLabel value="Id Medicamento" for="idMedicamento"></ice:outputLabel>
+						</div>
+						<div align="left">
+							<ice:inputText value="#{managerMedicamento.medicamento.codigo}"
+								id="idAgencia" required="true">
+							</ice:inputText>
+							<br />
+							<ice:message id="errorIdAgencia" for="idAgencia"></ice:message>
+						</div>
+						<div align="right">
+							<ice:outputLabel value="Nombre del Medicamento" for="nombreMedicamento"></ice:outputLabel>
+						</div>
+						<div align="left">
+							<ice:inputText value="#{managerMedicamento.medicamento.nomMedic}"
+								id="nombreMedicamento" required="true">
+								<f:validateLength minimum="0" maximum="50"></f:validateLength>
+							</ice:inputText>
+							<br />
+							<ice:message id="errorNombreMedicamento" for="nombreMedicamento"></ice:message>
+						</div>
+						<div align="right">
+							<ice:outputLabel value="Precio del Medicamento" for="precioMedicamento"></ice:outputLabel>
+						</div>
+						<div align="left">
+							<ice:inputText value="#{managerMedicamento.medicamento.precioMedic}"
+								id="precioMedicamento" required="true">
+							</ice:inputText>
+							<br />
+							<ice:message id="errorPrecioMedicamento" for="precioMedicamento"></ice:message>
+						</div>
+						<div align="right">
+							<ice:outputLabel value="Tipo del Medicamento" for="tipoMedicamento"></ice:outputLabel>
+						</div>
+						<div align="left">
+							<ice:inputText value="#{managerMedicamento.medicamento.tipoMedic}"
+								id="tipoMedicamento" required="true">
+								<f:validateLength minimum="0" maximum="50"></f:validateLength>
+							</ice:inputText>
+							<br />
+							<ice:message id="errorTipoMedicamento" for="tipoMedicamento"></ice:message>
+						</div>
+					</ice:panelGrid>
+					<!-- Manejo de creacion de la entidad  -->
+					<!-- Boton de guardado  -->
+					<ice:commandButton value="Guardar Medicamento"
+						action="#{managerMedicamento.guardar}">
+					</ice:commandButton>
+					<!-- FIN - Boton de guardado  -->
+					<ice:messages />
+				</ice:form>
+
+			</body>
+		</html>
+	</f:view>
+</jsp:root>

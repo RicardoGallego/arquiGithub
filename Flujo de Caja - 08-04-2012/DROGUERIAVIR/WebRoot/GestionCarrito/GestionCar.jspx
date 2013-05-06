@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root version="1.2" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+	<jsp:directive.page contentType="text/html;charset=ISO-8859-1"
+		pageEncoding="ISO-8859-1" />
+	<f:view>
+		<ice:outputDeclaration doctypeRoot="html"
+			doctypePublic="-//W3C//DTD HTML 4.01 Transitional//EN"
+			doctypeSystem="http://www.w3.org/TR/html4/loose.dtd" />
+		<html>
+			<head>
+				<title>GESTION DEL CARRITO DE COMPRAS</title>
+				<link rel="stylesheet" type="text/css"
+					href="./xmlhttp/css/xp/xp.css" />
+			</head>
+			<body>
+				<ice:outputText value="DROGUERIA VIRTUAL" />
+				<ice:form id="FORM-MedicamentoTabla">
+				<!-- Manejo de controles de edicion -->
+				<ice:inputText value="#{managerMedicamento.parametroBusqueda}" />
+				<ice:commandButton value="Filtrar"
+								action="#{managerMedicamento.filtar}">
+				</ice:commandButton>
+							
+				<!-- FIN - Manejo de controles de edicion -->
+				<!-- Manejo de controles de paginacion -->
+				<ice:panelGrid columns="2" >
+				<ice:outputText value="Numero de elementos por pagina" />
+						<ice:selectOneMenu id="selecPaginador"
+						partialSubmit="true" valueChangeListener="#{managerMedicamento.effectChangePaginator}" 
+						value="#{managerMedicamento.paginacion}">
+							<f:selectItem itemValue="5" itemLabel="5" />
+							<f:selectItem itemValue="10" itemLabel="10" />
+							<f:selectItem itemValue="15" itemLabel="15" />
+							<f:selectItem itemValue="20" itemLabel="20" />
+							<f:selectItem itemValue="369999" itemLabel="Todos" />
+						</ice:selectOneMenu>
+			    </ice:panelGrid><br />
+				<!-- FIN - Manejo de controles de paginacion -->
+				
+				<!-- Tabla de despliegue de datos -->
+					<ice:dataTable id="tablaMedicamentos" rows="#{managerMedicamento.paginacion}"  title="Tabla Medicamentos"
+						value="#{managerMedicamento.listMedicamentos}" var="medicamentoT">
+						<ice:column id="idMedicamento">
+							<f:facet name="header">
+								<ice:outputText value="ID Medicamento" />
+							</f:facet>
+							<ice:outputText value="#{managerMedicamento.medicamento.idMedic}" />
+						</ice:column>
+						<ice:column id="nombreMedicamento">
+							<f:facet name="header">
+								<ice:outputText value="Nombre" />
+							</f:facet>
+							<ice:inputText value="#{managerMedicamento.medicamento.nomMedic}" readonly="#{!managerMedicamento.renderEdit}" />
+						</ice:column>
+						<ice:column id="precioMedicamento">
+							<f:facet name="header">
+								<ice:outputText value="Precio" />
+							</f:facet>
+							<ice:inputText value="#{managerMedicamento.medicamento.precioMedic}" readonly="#{!managerMedicamento.renderEdit}" />
+						</ice:column>
+						<ice:column id="TipoMedicamento">
+							<f:facet name="header">
+								<ice:outputText value="Tipo" />
+							</f:facet>
+							<ice:inputText value="#{managerMedicamento.medicamento.tipoMedic}" readonly="#{!managerMedicamento.renderEdit}" />
+						</ice:column>
+						<ice:column id="addMedicamento">
+							<f:facet name="header">
+								<ice:outputText value="Adicionar al Carrito" />
+							</f:facet>
+							<ice:commandButton value="Adicionar"
+								actionListener="#{managerCarrito.addMedicamento}">
+								<f:attribute name="medicamentoT" value="#{medicamentoT}" />
+							</ice:commandButton>
+							<ice:commandButton value="Remover"
+								actionListener="#{managerCarrito.removeMedicamento}">
+								<f:attribute name="medicamentoT" value="#{medicamentoT}" />
+							</ice:commandButton>
+						</ice:column>
+					</ice:dataTable>
+					<!-- FIN - Tabla de despliegue de datos -->
+					<!-- Controles del manejo de la paginacion  -->
+					<ice:dataPaginator for="tablaMedicamentos" paginator="true" fastStep="5"
+						paginatorMaxPages="5">
+						<f:facet name="first">
+							<ice:graphicImage style="border:none;"
+								url="../xmlhttp/css/xp/css-images/arrow-first.gif"
+								title="First Page"></ice:graphicImage>
+						</f:facet>
+						<f:facet name="last">
+							<ice:graphicImage style="border:none;"
+								url="../xmlhttp/css/xp/css-images/arrow-last.gif"
+								title="Last Page"></ice:graphicImage>
+						</f:facet>
+						<f:facet name="previous">
+							<ice:graphicImage style="border:none;"
+								url="../xmlhttp/css/xp/css-images/arrow-previous.gif"
+								title="Previous Page"></ice:graphicImage>
+						</f:facet>
+						<f:facet name="next">
+							<ice:graphicImage style="border:none;"
+								url="../xmlhttp/css/xp/css-images/arrow-next.gif"
+								title="Next Page"></ice:graphicImage>
+						</f:facet>
+						<f:facet name="fastforward">
+							<ice:graphicImage style="border:none;"
+								url="../xmlhttp/css/xp/css-images/arrow-ff.gif"
+								title="Fast Forward"></ice:graphicImage>
+						</f:facet>
+						<f:facet name="fastrewind">
+							<ice:graphicImage style="border:none;"
+								url="../xmlhttp/css/xp/css-images/arrow-fr.gif"
+								title="Fast Backwards"></ice:graphicImage>
+						</f:facet>
+					</ice:dataPaginator>
+					<!-- FIN - Controles del manejo de la paginacion  -->
+					<!-- Texto informativo de la paginacion  -->
+					<ice:dataPaginator id="dataScroll_2" for="tablaMedicamentos"
+						rowsCountVar="rowsCount"
+						displayedRowsCountVar="displayedRowsCount"
+						firstRowIndexVar="firstRowIndex" lastRowIndexVar="lastRowIndex"
+						pageCountVar="pageCount" pageIndexVar="pageIndex">
+						<ice:outputFormat
+							value="{0} Encontrados, desplegados {1}, desde {2} hasta {3}. Página {4} / {5}."
+							styleClass="standard">
+							<f:param value="#{rowsCount}" />
+							<f:param value="#{displayedRowsCount}" />
+							<f:param value="#{firstRowIndex}" />
+							<f:param value="#{lastRowIndex}" />
+							<f:param value="#{pageIndex}" />
+							<f:param value="#{pageCount}" />
+						</ice:outputFormat>
+					</ice:dataPaginator>
+				    <!-- FIN - Texto informativo de la paginacion  -->
+				    
+				    
+				    
+				</ice:form>
+				
+<ice:form>
+<ice:dataTable id="Carrito" rows="#{managerMedicamento.paginacion}"  title="Carrito"
+						value="#{managerCarrito.lisCestaCompras}" var="carritoT">
+						<ice:column id="idMedicamento">
+							<f:facet name="header">
+								<ice:outputText value="ID Medicamento" />
+							</f:facet>
+							<ice:outputText value="#{managerGestionmedicamentos.gestmedic.idGestmedic}" />
+						</ice:column>
+						<ice:column id="nombreMedicamento">
+							<f:facet name="header">
+								<ice:outputText value="Nombre" />
+							</f:facet>
+							<ice:outputText value="#{managerGestionmedicamentos.gestmedic.cantGestmedic}"  />
+						</ice:column>
+						
+					</ice:dataTable>
+					<!-- FIN - Tabla de despliegue de datos -->
+					<!-- Controles del manejo de la paginacion  -->
+					<ice:dataPaginator for="Carrito" paginator="true" fastStep="5"
+						paginatorMaxPages="5">
+						<f:facet name="first">
+							<ice:graphicImage style="border:none;"
+								url="../xmlhttp/css/xp/css-images/arrow-first.gif"
+								title="First Page"></ice:graphicImage>
+						</f:facet>
+						<f:facet name="last">
+							<ice:graphicImage style="border:none;"
+								url="../xmlhttp/css/xp/css-images/arrow-last.gif"
+								title="Last Page"></ice:graphicImage>
+						</f:facet>
+						<f:facet name="previous">
+							<ice:graphicImage style="border:none;"
+								url="../xmlhttp/css/xp/css-images/arrow-previous.gif"
+								title="Previous Page"></ice:graphicImage>
+						</f:facet>
+						<f:facet name="next">
+							<ice:graphicImage style="border:none;"
+								url="../xmlhttp/css/xp/css-images/arrow-next.gif"
+								title="Next Page"></ice:graphicImage>
+						</f:facet>
+						<f:facet name="fastforward">
+							<ice:graphicImage style="border:none;"
+								url="../xmlhttp/css/xp/css-images/arrow-ff.gif"
+								title="Fast Forward"></ice:graphicImage>
+						</f:facet>
+						<f:facet name="fastrewind">
+							<ice:graphicImage style="border:none;"
+								url="../xmlhttp/css/xp/css-images/arrow-fr.gif"
+								title="Fast Backwards"></ice:graphicImage>
+						</f:facet>
+					</ice:dataPaginator>
+					<!-- FIN - Controles del manejo de la paginacion  -->
+					<!-- Texto informativo de la paginacion  -->
+					<ice:dataPaginator id="dataScroll_2" for="Carrito"
+						rowsCountVar="rowsCount"
+						displayedRowsCountVar="displayedRowsCount"
+						firstRowIndexVar="firstRowIndex" lastRowIndexVar="lastRowIndex"
+						pageCountVar="pageCount" pageIndexVar="pageIndex">
+						<ice:outputFormat
+							value="{0} Encontrados, desplegados {1}, desde {2} hasta {3}. Página {4} / {5}."
+							styleClass="standard">
+							<f:param value="#{rowsCount}" />
+							<f:param value="#{displayedRowsCount}" />
+							<f:param value="#{firstRowIndex}" />
+							<f:param value="#{lastRowIndex}" />
+							<f:param value="#{pageIndex}" />
+							<f:param value="#{pageCount}" />
+						</ice:outputFormat>
+					</ice:dataPaginator>
+</ice:form>
+			</body>
+		</html>
+	</f:view>
+</jsp:root>
